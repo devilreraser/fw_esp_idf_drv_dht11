@@ -1,7 +1,7 @@
-menu "Component template Configuration"
+menu "Component drv_dht11 Configuration"
 
-    config TEMPLATE_USE
-        bool "Use template component"
+    config DRV_DHT11_USE
+        bool "Use drv_dht11 component"
         default y
         
 endmenu
