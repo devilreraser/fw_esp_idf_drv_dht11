@@ -110,7 +110,7 @@ void drv_dht11_init(gpio_num_t gpio_num) {
 }
 
 struct drv_dht11_reading drv_dht11_read() {
-    /* Tried to sense too son since last read (dht11 needs ~2 seconds to make a new read) */
+    /* Tried to sense too soon since last read (dht11 needs ~2 seconds to make a new read) */
     if(esp_timer_get_time() - 2000000 < last_read_time) {
         return last_read;
     }
