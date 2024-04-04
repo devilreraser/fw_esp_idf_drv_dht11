@@ -313,9 +313,10 @@ struct drv_dht11_reading drv_dht11_read()
     #if USE_RMT
     #if CONFIG_DRV_RMT_USE
     size_t len = 0;
-
-    //len = drv_rmt_test_read_rx(data, sizeof(data), pdMS_TO_TICKS(5+1)+1); //at least one rtos tick
-    len = drv_rmt_test_read_rx(data, sizeof(data), portMAX_DELAY); //at least one rtos tick
+    #define pdMS_TO_TICKS_FIX(x) (pdMS_TO_TICKS(x) > 0) ? pdMS_TO_TICKS(x) : 1  //at least one rtos tick
+    TickType_t delay = pdMS_TO_TICKS_FIX(80);  //at least one rtos tick
+    len = drv_rmt_test_read_rx(data, sizeof(data), delay); 
+    //len = drv_rmt_test_read_rx(data, sizeof(data), portMAX_DELAY); //at least one rtos tick
 
 
     #if USE_RMT_RECONFIGURE_EACH_TRANSMISSION
